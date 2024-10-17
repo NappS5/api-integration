@@ -8,26 +8,30 @@ app.use(cors());
 app.use(express.json());
 
 
-app.post('/proxy-api', (req, res) => {
-    console.log('Dados enviados para a API:', req.body);
+app.get('/proxy-api', (req, res) => {
+    console.log('Dados enviados para a API:', req.query);
+    // console.log(req);
     
-    axios.post('https://equilibrioapperp.pontalsistemas.com.br/ServerIntegracao/PesquisaProduto', {
-        Grupo: req.body.Grupo,
-        Empresa: req.body.Empresa,
-        Token: req.body.Token,
-        TipoPesquisa: req.body.TipoPesquisa,
-        Campo: req.body.Campo,
-        Valor: req.body.Valor,
-        limite: req.body.limite,
-        Paginacao: req.body.Paginacao
-        },{
-
+    axios.get('https://equilibrioapperp.pontalsistemas.com.br/ServerIntegracao/PesquisaProduto', {
         headers: {
             'X-Embarcadero-App-Secret': 'DE1BA56B-43C5-469D-9BD2-4EB146EB8473',
             'Content-Type': 'application/json',
             'Connection': 'keep-alive',
             'Accept': '*/*'
+        },
+        body: {
+            "Grupo": req.query.Grupo,
+            "Empresa": req.query.Empresa,
+            "Token": req.query.Token,
+            "TipoPesquisa": req.query.TipoPesquisa,
+            "Campo": req.query.Campo,
+            "Valor": req.query.Valor,
+            "limite": req.query.limite,
+            "Paginacao": req.query.Paginacao
         }
+        },{
+
+        
     })
     .then(response => {
         console.log('Resposta da API recebida:', response.data);

@@ -6,21 +6,11 @@ function Produtos() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:5000/proxy-api', {
-            method: 'POST',
+        fetch('http://localhost:5000/proxy-api?Grupo=264&Empresa=570&Token=9986PTKHUM6DL9X863TU&TipoPesquisa=G&Campo=&Valor=&limite=3&Paginacao=1', {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                Grupo: "264",
-                Empresa: "570",
-                Token: "9986PTKHUM6DL9X863TU",
-                TipoPesquisa: "G",
-                Campo: "",
-                Valor: "",
-                limite: "3",
-                Paginacao: "1"
-              })
         })
         .then(response => {
             if (!response.ok) {
